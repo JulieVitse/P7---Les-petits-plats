@@ -1,0 +1,19 @@
+{
+  "name": "p7---les-petits-plats",
+  "version": "1.0.0",
+  "description": "P7 - Les Petits Plats",
+  "main": "recipes.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./css/style.min.css --style compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulieVitse/P7---Les-petits-plats.git"
+  },
+  "author": "Julie Vitse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JulieVitse/P7---Les-petits-plats/issues"
+  },
+  "homepage": "https://github.com/JulieVitse/P7---Les-petits-plats#readme"
+}
