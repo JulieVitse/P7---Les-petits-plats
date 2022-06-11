@@ -32,34 +32,135 @@ header{
 }
 
 .search{
-    position: relative;
-    &__input{
-        width: 100%;
-        height: 69px;
+    &__main{
         position: relative;
-        border: none;
-        background-color: $color-light;
-        border-radius: $radius;
-        font-size: 18px;
-        padding: 0 $mp-small;
-        &:focus{
-            outline: none;
-            background-color: #f9d2d2;
+        &__input{
+            width: 100%;
+            height: 69px;
+            position: relative;
+            border: none;
+            background-color: $color-light;
+            border-radius: $radius;
+            font-size: 18px;
+            padding: 0 $mp-small;
+            &:focus{
+                outline: none;
+                background-color: lighten($color-tersiary, 25%);
+            }
+            &::placeholder{
+                transition: all .3s ease;
+                color: rgba(0, 0, 0, 0.25);
+            }
+            &:focus::placeholder{
+                color: transparent;
+            }
         }
-        &::placeholder{
-            transition: all .3s ease;
-            color: rgba(0, 0, 0, 0.25);
-        }
-        &:focus::placeholder{
-            color: transparent;
+        &__icon{
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
         }
     }
-    &__icon{
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 2rem;
+    &__tags{
+        display: flex;
+        margin-bottom: $mp-small;
+    }
+    &__filters{
+        display: flex;
+        width: 100%;
+        gap: $mp-medium;
+        &__filter{
+            width: 170px;
+            height: 69px;
+            border-radius: $radius;
+            display: flex;
+            position: relative;
+            &__wrapper{
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                display: flex;
+                flex-direction: column;
+                height: auto;
+                color: $color-white;
+                border-radius: $radius;
+                
+                &__input{
+                    display: flex;
+                    height: 69px;
+                    align-items: center;
+                    justify-content: space-between;
+                    color: $color-white;
+                    padding: 0 $mp-smaller;
+                    &__label{
+                        position: absolute;
+                        font-weight: $font-bold;
+                        font-size: 18px;
+                    }
+                    &__field{
+                        border: none;
+                        background-color: transparent;
+                        font-size: 18px;
+                        width: 80%;
+                        color: $color-white;
+                        &::placeholder{
+                            color: $color-light;
+                            transition: all .3s ease;
+                            opacity: 0;
+                        }
+                        &:focus{
+                            outline: none;
+                        }
+                    }
+                    &__btn{
+                        cursor: pointer;
+                    }
+                }
+                &__list{
+                    display: grid;
+                    gap: $mp-smallest;
+                    padding: $mp-smaller;
+                    max-height: 397px;
+                    overflow-y: auto;
+                    display: none;
+                    &::-webkit-scrollbar{
+                        width: 5px;
+                        border-radius: $radius;
+                    }
+                    &::-webkit-scrollbar-thumb{
+                        border-radius: $radius;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.search__filters__filter--first .search__filters__filter__wrapper{
+    background-color: $color-primary;
+    &__list{
+        &::-webkit-scrollbar-thumb{
+            background: darken($color-primary, 15%);
+        }
+    }
+}
+.search__filters__filter--second .search__filters__filter__wrapper{
+    background-color: $color-secondary;
+    &__list{
+        &::-webkit-scrollbar-thumb{
+            background: darken($color-secondary, 15%);
+        }
+    }
+}
+.search__filters__filter--third .search__filters__filter__wrapper{
+    background-color: $color-tersiary;
+    &__list{
+        &::-webkit-scrollbar-thumb{
+            background: darken($color-tersiary, 15%);
+        }
     }
 }
 // removes default styling of input search
@@ -68,4 +169,15 @@ input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance:none;
+}
+
+.open{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.expanded{
+    width: 667px;
+}
+.rotate{
+    transform: rotate(180deg);
 }

@@ -10,23 +10,148 @@
 </head>
 
 <body class="body">
+    <!-- ---------------------------- HEADER START ----------------------------- -->
     <header>
         <div class="logo">
             <img class="logo__img" src="assets/logo.png" alt="Les petits plats logo">
         </div>
     </header>
+    <!-- ----------------------------- HEADER END ------------------------------ -->
+    <!-- ----------------------------- MAIN START ------------------------------ -->
+    <main>
+        <!-- --------------------------- search section ---------------------------- -->
+        <aside class="search">
+            <div class="search__main">
+                <input type="search" name="search" id="search" class="search__main__input" placeholder="Rechercher une recette">
+                <i class="fa-solid fa-magnifying-glass search__main__icon"></i>
+            </div>
 
-    <aside class="search">
-        <input type="search" name="search" id="search" class="search__input" placeholder="Rechercher une recette">
-        <i class="fa-solid fa-magnifying-glass search__icon"></i>
-    </aside>
+            <div class="search__tags"></div>
+
+            <div class="search__filters">
+                <div class="search__filters__filter search__filters__filter--first">
+                    <div class="search__filters__filter__wrapper">
+                        <div class="search__filters__filter__wrapper__input">
+                            <input type="text" name="ingredients" id="ingredients" class="search__filters__filter__wrapper__input__field" placeholder="Rechercher un ingrédient">
+                            <label for="ingredients" class="search__filters__filter__wrapper__input__label">Ingredients</label>
+                            <i class="fa-solid fa-chevron-down search__filters__filter__wrapper__input__btn"></i>
+                        </div>
+    
+                        <ul class="search__filters__filter__wrapper__list">
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="search__filters__filter search__filters__filter--second">
+                    <div class="search__filters__filter__wrapper">
+                        <div class="search__filters__filter__wrapper__input">
+                            <input type="text" name="appareils" id="appareils"
+                            class="search__filters__filter__wrapper__input__field" placeholder="Rechercher un appareil">
+                            <label for="appareils" class="search__filters__filter__wrapper__input__label">Appareils</label>
+                            <i class="fa-solid fa-chevron-down search__filters__filter__wrapper__input__btn"></i>
+                        </div>
+    
+                        <ul class="search__filters__filter__wrapper__list">
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+
+                <div class="search__filters__filter search__filters__filter--third">
+                    <div class="search__filters__filter__wrapper">
+                        <div class="search__filters__filter__wrapper__input">
+                            <input type="text" name="ustensiles" id="ustensiles"
+                            class="search__filters__filter__wrapper__input__field" placeholder="Rechercher un ustensile">
+                            <label for="ustensiles" class="search__filters__filter__wrapper__input__label">Ustensiles</label>
+                            <i class="fa-solid fa-chevron-down search__filters__filter__wrapper__input__btn"></i>
+                        </div>
+    
+                        <ul class="search__filters__filter__wrapper__list">
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                            <li>Ingredient</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </aside>
+        <!-- ------------------------- search section end -------------------------- -->
+        <section class="recipes"></section>
+    </main>
 
 
 
 
 
     
-<script src=""></script>    
+<script src="/scripts/utils/filters.js"></script>   
+<script src="/scripts/data/recipes.js"></script> 
 </body>
 
 </html>

@@ -30,10 +30,10 @@ header {
   width: 270px;
 }
 
-.search {
+.search__main {
   position: relative;
 }
-.search__input {
+.search__main__input {
   width: 100%;
   height: 69px;
   position: relative;
@@ -43,39 +43,145 @@ header {
   font-size: 18px;
   padding: 0 1.5rem;
 }
-.search__input:focus {
+.search__main__input:focus {
   outline: none;
-  background-color: #f9d2d2;
+  background-color: #f9cdc7;
 }
-.search__input::-moz-placeholder {
+.search__main__input::-moz-placeholder {
   -moz-transition: all 0.3s ease;
   transition: all 0.3s ease;
   color: rgba(0, 0, 0, 0.25);
 }
-.search__input:-ms-input-placeholder {
+.search__main__input:-ms-input-placeholder {
   -ms-transition: all 0.3s ease;
   transition: all 0.3s ease;
   color: rgba(0, 0, 0, 0.25);
 }
-.search__input::placeholder {
+.search__main__input::placeholder {
   transition: all 0.3s ease;
   color: rgba(0, 0, 0, 0.25);
 }
-.search__input:focus::-moz-placeholder {
+.search__main__input:focus::-moz-placeholder {
   color: transparent;
 }
-.search__input:focus:-ms-input-placeholder {
+.search__main__input:focus:-ms-input-placeholder {
   color: transparent;
 }
-.search__input:focus::placeholder {
+.search__main__input:focus::placeholder {
   color: transparent;
 }
-.search__icon {
+.search__main__icon {
   position: absolute;
   right: 0;
   top: 50%;
   transform: translate(-50%, -50%);
   font-size: 2rem;
+}
+.search__tags {
+  display: flex;
+  margin-bottom: 1.5rem;
+}
+.search__filters {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+}
+.search__filters__filter {
+  width: 170px;
+  height: 69px;
+  border-radius: 5px;
+  display: flex;
+  position: relative;
+}
+.search__filters__filter__wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  color: #fff;
+  border-radius: 5px;
+}
+.search__filters__filter__wrapper__input {
+  display: flex;
+  height: 69px;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  padding: 0 1rem;
+}
+.search__filters__filter__wrapper__input__label {
+  position: absolute;
+  font-weight: 700;
+  font-size: 18px;
+}
+.search__filters__filter__wrapper__input__field {
+  border: none;
+  background-color: transparent;
+  font-size: 18px;
+  width: 80%;
+  color: #fff;
+}
+.search__filters__filter__wrapper__input__field::-moz-placeholder {
+  color: #E7E7E7;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+.search__filters__filter__wrapper__input__field:-ms-input-placeholder {
+  color: #E7E7E7;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+.search__filters__filter__wrapper__input__field::placeholder {
+  color: #E7E7E7;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+.search__filters__filter__wrapper__input__field:focus {
+  outline: none;
+}
+.search__filters__filter__wrapper__input__btn {
+  cursor: pointer;
+}
+.search__filters__filter__wrapper__list {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
+  max-height: 397px;
+  overflow-y: auto;
+  display: none;
+}
+.search__filters__filter__wrapper__list::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 5px;
+}
+.search__filters__filter__wrapper__list::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+.search__filters__filter--first .search__filters__filter__wrapper {
+  background-color: #3282F7;
+}
+.search__filters__filter--first .search__filters__filter__wrapper__list::-webkit-scrollbar-thumb {
+  background: #085bd4;
+}
+
+.search__filters__filter--second .search__filters__filter__wrapper {
+  background-color: #68D9A4;
+}
+.search__filters__filter--second .search__filters__filter__wrapper__list::-webkit-scrollbar-thumb {
+  background: #31c37f;
+}
+
+.search__filters__filter--third .search__filters__filter__wrapper {
+  background-color: #ED6454;
+}
+.search__filters__filter--third .search__filters__filter__wrapper__list::-webkit-scrollbar-thumb {
+  background: #dd2c17;
 }
 
 input[type=search]::-webkit-search-decoration,
@@ -83,4 +189,17 @@ input[type=search]::-webkit-search-cancel-button,
 input[type=search]::-webkit-search-results-button,
 input[type=search]::-webkit-search-results-decoration {
   -webkit-appearance: none;
+}
+
+.open {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.expanded {
+  width: 667px;
+}
+
+.rotate {
+  transform: rotate(180deg);
 }/*# sourceMappingURL=main.css.map */
