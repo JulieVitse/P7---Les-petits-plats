@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Roboto&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +12,8 @@ html {
 }
 
 .body {
-  padding: 0 5rem;
+  max-width: 1440px;
+  margin: auto;
 }
 
 header {
@@ -30,6 +31,9 @@ header {
   width: 270px;
 }
 
+.search {
+  margin-bottom: 3rem;
+}
 .search__main {
   position: relative;
 }
@@ -191,6 +195,7 @@ input[type=search]::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
 
+/* ------------------------------ added classes ----------------------------- */
 .open {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -202,4 +207,60 @@ input[type=search]::-webkit-search-results-decoration {
 
 .rotate {
   transform: rotate(180deg);
+}
+
+/* --------------------------------- recipes -------------------------------- */
+.recipes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  border-radius: 5px;
+  background-color: #E7E7E7;
+}
+.card__img {
+  background-color: grey;
+  height: 13rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.card__content {
+  padding: 1rem;
+}
+.card__content__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  padding-bottom: 1rem;
+}
+.card__content__top__title {
+  font-weight: 700;
+}
+.card__content__top__time {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+}
+.card__content__bot {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  font-size: 14px;
+}
+.card__content__bot__list li {
+  font-weight: 700;
+}
+.card__content__bot__list li::first-letter {
+  text-transform: capitalize;
+}
+.card__content__bot__list li span {
+  font-weight: normal;
+}
+.card__content__bot__description {
+  font-family: "Roboto", sans-serif;
 }/*# sourceMappingURL=main.css.map */

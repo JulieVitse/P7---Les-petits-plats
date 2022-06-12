@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Roboto&display=swap');
 
 @import "./utils/variables";
 
@@ -13,7 +13,8 @@ html{
     font-family: $font-text;
 }
 .body{
-    padding: 0 $mp-largest;
+    max-width: 1440px;
+    margin: auto;
 }
 
 header{
@@ -32,6 +33,7 @@ header{
 }
 
 .search{
+    margin-bottom: $mp-large;
     &__main{
         position: relative;
         &__input{
@@ -170,7 +172,7 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance:none;
 }
-
+/* ------------------------------ added classes ----------------------------- */
 .open{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -180,4 +182,61 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 .rotate{
     transform: rotate(180deg);
+}
+/* --------------------------------- recipes -------------------------------- */
+.recipes{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $mp-large;
+    margin-bottom: $mp-medium;
+}
+
+.card{
+    border-radius: $radius;
+    background-color: $color-light;
+    &__img{
+        background-color: grey;
+        height: 13rem;
+        border-top-left-radius: $radius;
+        border-top-right-radius: $radius;
+    }
+    &__content{
+        padding: $mp-smaller;
+        &__top{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 18px;
+            padding-bottom: $mp-smaller;
+            &__title{
+                font-weight: $font-bold;
+            }
+            &__time{
+                display: flex;
+                align-items: center;
+                gap: $mp-smallest;
+                font-weight: $font-bold;
+            }
+        }
+        &__bot{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: $mp-small;
+            font-size: 14px;
+            &__list{
+                & li{
+                    font-weight: $font-bold;
+                    &::first-letter{
+                        text-transform: capitalize;
+                    }
+                    & span{
+                        font-weight: normal;
+                    }
+                }
+            }
+            &__description{
+                font-family: $font-sub;
+            }
+        }
+    }
 }
