@@ -21,120 +21,53 @@
     <main>
         <!-- --------------------------- search section ---------------------------- -->
         <aside class="search">
+            <!-- search -->
             <div class="search__main">
                 <input type="search" name="search" id="search" class="search__main__input" placeholder="Rechercher une recette">
                 <i class="fa-solid fa-magnifying-glass search__main__icon"></i>
             </div>
-
+            <!-- tags -->
             <div class="search__tags"></div>
-
+            <!-- filtres -->
             <div class="search__filters">
-                <div class="search__filters__filter search__filters__filter--first">
+                <div class="search__filters__filter search__filters__filter--first" data-filter="ingredients">
                     <div class="search__filters__filter__wrapper">
                         <div class="search__filters__filter__wrapper__input">
-                            <input type="text" name="ingredients" id="ingredients" class="search__filters__filter__wrapper__input__field" placeholder="Rechercher un ingrédient">
-                            <label for="ingredients" class="search__filters__filter__wrapper__input__label">Ingredients</label>
-                            <i class="fa-solid fa-chevron-down search__filters__filter__wrapper__input__btn"></i>
+                            <input type="text" name="ingredients" id="ingredients" class="search__filters__filter__wrapper__input__field" placeholder="Rechercher un ingrédient" data-filter-input>
+                            <label for="ingredients" class="search__filters__filter__wrapper__input__label" data-filter-label>Ingredients</label>
+                            <i class="fa-solid fa-chevron-down search__filters__filter__wrapper__input__btn" data-filter-control></i>
                         </div>
     
-                        <ul class="search__filters__filter__wrapper__list">
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
+                        <ul class="search__filters__filter__wrapper__list" data-filter-list>
                         </ul>
                     </div>
                 </div>
 
-                <div class="search__filters__filter search__filters__filter--second">
+                <div class="search__filters__filter search__filters__filter--second" data-filter="appareils">
                     <div class="search__filters__filter__wrapper">
                         <div class="search__filters__filter__wrapper__input">
                             <input type="text" name="appareils" id="appareils"
-                            class="search__filters__filter__wrapper__input__field" placeholder="Rechercher un appareil">
-                            <label for="appareils" class="search__filters__filter__wrapper__input__label">Appareils</label>
-                            <i class="fa-solid fa-chevron-down search__filters__filter__wrapper__input__btn"></i>
+                            class="search__filters__filter__wrapper__input__field" placeholder="Rechercher un appareil" data-filter-input>
+                            <label for="appareils" class="search__filters__filter__wrapper__input__label" data-filter-label>Appareils</label>
+                            <i class="fa-solid fa-chevron-down search__filters__filter__wrapper__input__btn" data-filter-control></i>
                         </div>
     
-                        <ul class="search__filters__filter__wrapper__list">
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
+                        <ul class="search__filters__filter__wrapper__list" data-filter-list>
                         </ul>
                     </div>
                     
                 </div>
 
-                <div class="search__filters__filter search__filters__filter--third">
+                <div class="search__filters__filter search__filters__filter--third" data-filter="ustensiles">
                     <div class="search__filters__filter__wrapper">
                         <div class="search__filters__filter__wrapper__input">
                             <input type="text" name="ustensiles" id="ustensiles"
-                            class="search__filters__filter__wrapper__input__field" placeholder="Rechercher un ustensile">
-                            <label for="ustensiles" class="search__filters__filter__wrapper__input__label">Ustensiles</label>
-                            <i class="fa-solid fa-chevron-down search__filters__filter__wrapper__input__btn"></i>
+                            class="search__filters__filter__wrapper__input__field" placeholder="Rechercher un ustensile" data-filter-input>
+                            <label for="ustensiles" class="search__filters__filter__wrapper__input__label" data-filter-label>Ustensiles</label>
+                            <i class="fa-solid fa-chevron-down search__filters__filter__wrapper__input__btn" data-filter-control></i>
                         </div>
     
-                        <ul class="search__filters__filter__wrapper__list">
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
-                            <li>Ingredient</li>
+                        <ul class="search__filters__filter__wrapper__list" data-filter-list>
                         </ul>
                     </div>
                     
@@ -142,22 +75,7 @@
             </div>
         </aside>
         <!-- ------------------------- search section end -------------------------- -->
-        <section class="recipes">
-            <!-- <article class="card">
-                <div class="card__img"></div>
-                <div class="card__content">
-                    <div class="card__content__top">
-                        <h4 class="card__content__top__title"></h4>
-                        <span class="card__content__top__time"><img src="/assets/timer.png" alt=""></span>
-                    </div>
-
-                    <div class="card__content__bot">
-                        <ul class="card__content__bot__list"></ul>
-                        <div class="card__content__bot__description"></div>
-                    </div>
-                </div>
-            </article> -->
-        </section>
+        <section class="recipes"></section>
     </main>
 
 
@@ -165,9 +83,8 @@
 
 <script src="/scripts/data/recipes.js"></script>
 <script src="/scripts/models/recipeCard.js"></script>
-
+<script src="/scripts/utils/filters.js"></script>  
 <script src="/scripts/index.js"></script>
-<script src="/scripts/utils/filters.js"></script>   
 </body>
 
 </html>
