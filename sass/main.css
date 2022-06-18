@@ -83,7 +83,31 @@ header {
 }
 .search__tags {
   display: flex;
-  margin-bottom: 1.5rem;
+  margin: 1rem 0;
+  gap: 0.5rem;
+}
+.search__tags__tag {
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+.search__tags__tag__btn {
+  background-color: transparent;
+  border: none;
+  height: 24px;
+  margin-left: 0.5rem;
+}
+.search__tags__tag--primary {
+  background-color: #3282F7;
+}
+.search__tags__tag--secondary {
+  background-color: #68D9A4;
+}
+.search__tags__tag--tersiary {
+  background-color: #ED6454;
 }
 .search__filters {
   display: flex;
@@ -96,6 +120,33 @@ header {
   border-radius: 5px;
   display: flex;
   position: relative;
+}
+.search__filters__filter--first .search__filters__filter__wrapper {
+  background: #3282F7;
+}
+.search__filters__filter--first .search__filters__filter__wrapper__list li:hover {
+  background: #63a0f9;
+}
+.search__filters__filter--first .search__filters__filter__wrapper__list::-webkit-scrollbar-thumb {
+  background: #085bd4;
+}
+.search__filters__filter--second .search__filters__filter__wrapper {
+  background: #68D9A4;
+}
+.search__filters__filter--second .search__filters__filter__wrapper__list li:hover {
+  background: #91e3bd;
+}
+.search__filters__filter--second .search__filters__filter__wrapper__list::-webkit-scrollbar-thumb {
+  background: #31c37f;
+}
+.search__filters__filter--third .search__filters__filter__wrapper {
+  background: #ED6454;
+}
+.search__filters__filter--third .search__filters__filter__wrapper__list li:hover {
+  background: #f28e82;
+}
+.search__filters__filter--third .search__filters__filter__wrapper__list::-webkit-scrollbar-thumb {
+  background: #dd2c17;
 }
 .search__filters__filter__wrapper {
   position: absolute;
@@ -159,33 +210,19 @@ header {
   overflow-y: auto;
   display: none;
 }
+.search__filters__filter__wrapper__list li {
+  cursor: pointer;
+  font-size: 18px;
+}
+.search__filters__filter__wrapper__list li::first-letter {
+  text-transform: uppercase;
+}
 .search__filters__filter__wrapper__list::-webkit-scrollbar {
   width: 5px;
   border-radius: 5px;
 }
 .search__filters__filter__wrapper__list::-webkit-scrollbar-thumb {
   border-radius: 5px;
-}
-
-.search__filters__filter--first .search__filters__filter__wrapper {
-  background-color: #3282F7;
-}
-.search__filters__filter--first .search__filters__filter__wrapper__list::-webkit-scrollbar-thumb {
-  background: #085bd4;
-}
-
-.search__filters__filter--second .search__filters__filter__wrapper {
-  background-color: #68D9A4;
-}
-.search__filters__filter--second .search__filters__filter__wrapper__list::-webkit-scrollbar-thumb {
-  background: #31c37f;
-}
-
-.search__filters__filter--third .search__filters__filter__wrapper {
-  background-color: #ED6454;
-}
-.search__filters__filter--third .search__filters__filter__wrapper__list::-webkit-scrollbar-thumb {
-  background: #dd2c17;
 }
 
 input[type=search]::-webkit-search-decoration,
@@ -201,12 +238,36 @@ input[type=search]::-webkit-search-results-decoration {
   grid-template-columns: repeat(3, 1fr);
 }
 
+.openfirst {
+  display: grid;
+}
+
 .expanded {
   width: 667px;
 }
 
+.expandedfirst {
+  width: 300px;
+}
+
 .rotate {
   transform: rotate(180deg);
+}
+
+.clicked::-moz-placeholder {
+  opacity: 1;
+}
+
+.clicked:-ms-input-placeholder {
+  opacity: 1;
+}
+
+.clicked::placeholder {
+  opacity: 1;
+}
+
+.hidden {
+  display: none;
 }
 
 /* --------------------------------- recipes -------------------------------- */

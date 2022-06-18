@@ -67,7 +67,31 @@ header{
     }
     &__tags{
         display: flex;
-        margin-bottom: $mp-small;
+        margin: $mp-smaller 0;
+        gap: $mp-smallest;
+        &__tag{
+            border-radius: $radius;
+            color: $color-white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: .5rem;
+            &__btn{
+                background-color: transparent;
+                border: none;
+                height: 24px;
+                margin-left: .5rem;
+            }
+            &--primary{
+                background-color: $color-primary;
+            }
+            &--secondary{
+                background-color: $color-secondary;
+            }
+            &--tersiary{
+                background-color: $color-tersiary;
+            }
+        }
     }
     &__filters{
         display: flex;
@@ -79,6 +103,45 @@ header{
             border-radius: $radius;
             display: flex;
             position: relative;
+            &--first &{
+                &__wrapper{
+                    background: $color-primary;
+                    &__list{
+                        & li:hover{
+                            background: lighten($color-primary, 10%);
+                        }
+                        &::-webkit-scrollbar-thumb{
+                            background: darken($color-primary, 15%);
+                        }
+                    }
+                }
+            }
+            &--second &{
+                &__wrapper{
+                    background: $color-secondary;
+                    &__list{
+                        & li:hover{
+                            background: lighten($color-secondary, 10%);
+                        }
+                        &::-webkit-scrollbar-thumb{
+                            background: darken($color-secondary, 15%);
+                        }
+                    }
+                }
+            }
+            &--third &{
+                &__wrapper{
+                    background: $color-tersiary;
+                    &__list{
+                        & li:hover{
+                            background: lighten($color-tersiary, 10%);
+                        }
+                        &::-webkit-scrollbar-thumb{
+                            background: darken($color-tersiary, 15%);
+                        }
+                    }
+                }
+            }
             &__wrapper{
                 position: absolute;
                 top: 0;
@@ -101,6 +164,7 @@ header{
                         position: absolute;
                         font-weight: $font-bold;
                         font-size: 18px;
+                        //display: none;
                     }
                     &__field{
                         border: none;
@@ -108,7 +172,7 @@ header{
                         font-size: 18px;
                         width: 80%;
                         color: $color-white;
-                        &::placeholder{
+                         &::placeholder{
                             color: $color-light;
                             transition: all .3s ease;
                             opacity: 0;
@@ -128,6 +192,13 @@ header{
                     max-height: 397px;
                     overflow-y: auto;
                     display: none;
+                    & li {
+                        cursor: pointer;
+                        font-size: 18px;
+                        &::first-letter{
+                            text-transform: uppercase;
+                        }
+                    }
                     &::-webkit-scrollbar{
                         width: 5px;
                         border-radius: $radius;
@@ -141,30 +212,6 @@ header{
     }
 }
 
-.search__filters__filter--first .search__filters__filter__wrapper{
-    background-color: $color-primary;
-    &__list{
-        &::-webkit-scrollbar-thumb{
-            background: darken($color-primary, 15%);
-        }
-    }
-}
-.search__filters__filter--second .search__filters__filter__wrapper{
-    background-color: $color-secondary;
-    &__list{
-        &::-webkit-scrollbar-thumb{
-            background: darken($color-secondary, 15%);
-        }
-    }
-}
-.search__filters__filter--third .search__filters__filter__wrapper{
-    background-color: $color-tersiary;
-    &__list{
-        &::-webkit-scrollbar-thumb{
-            background: darken($color-tersiary, 15%);
-        }
-    }
-}
 // removes default styling of input search
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
@@ -177,11 +224,23 @@ input[type="search"]::-webkit-search-results-decoration {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
+.openfirst{
+    display: grid;
+}
 .expanded{
     width: 667px;
 }
+.expandedfirst{
+    width: 300px;
+}
 .rotate{
     transform: rotate(180deg);
+}
+.clicked::placeholder{
+    opacity: 1;
+}
+.hidden{
+    display: none;
 }
 /* --------------------------------- recipes -------------------------------- */
 .recipes{
