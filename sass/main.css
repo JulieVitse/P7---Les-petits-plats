@@ -49,7 +49,7 @@ header {
 }
 .search__main__input:focus {
   outline: none;
-  background-color: #f9cdc7;
+  box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.158);
 }
 .search__main__input::-moz-placeholder {
   -moz-transition: all 0.3s ease;
@@ -99,6 +99,7 @@ header {
   border: none;
   height: 24px;
   margin-left: 0.5rem;
+  cursor: pointer;
 }
 .search__tags__tag--primary {
   background-color: #3282F7;
@@ -171,6 +172,7 @@ header {
   position: absolute;
   font-weight: 700;
   font-size: 18px;
+  cursor: text;
 }
 .search__filters__filter__wrapper__input__field {
   border: none;

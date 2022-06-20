@@ -10,15 +10,17 @@ const filters = {
     ustensils: new Filter(document.querySelector('[data-filter="ustensils"]'))
 };
 
+const filterTypes = ["ingredients", "appliances", "ustensils"];
+
 let currentFilter = null;
 
-const tags = {
+/* const tags = {
     ingredients: [],
     appliances: [],
     ustensils: []
-}
+} */
 
-const tagsClasses = {
+const tagsTypes = {
     ingredients: 'primary',
     appliances: 'secondary',
     ustensils: 'tersiary',
@@ -28,9 +30,13 @@ const selectedTags = [];
 
 
 function showList (filter){
-    if (currentFilter) closeList();
+    if (currentFilter) {
+        closeList();
+    }
     //console.log(currentFilter)
     currentFilter = filter;
+
+    document.addEventListener('click', clickOut);
     //console.log(currentFilter)
     filter.label.classList.add('hidden');
     filter.input.classList.add('clicked');
@@ -53,6 +59,7 @@ function expandList(filter){
 }
 
 function closeList(){
+    document.removeEventListener('click', clickOut);
     let filter = currentFilter;
     filter.control.classList.remove('rotate');
     filter.label.classList.remove('hidden');
@@ -64,6 +71,13 @@ function closeList(){
     currentFilter = null;
 }
 
+function clickOut(e){
+    let clickTarget = e.target;
+    if (!currentFilter.container.contains(clickTarget)) {
+        closeList();
+        //console.log(clickTarget);
+    }
+}
 
 // créé arrays pour listes de filtre
 recipes.map((recipe) => {
@@ -81,59 +95,76 @@ recipes.map((recipe) => {
     applianceArray = [...new Set(applianceArray)].sort();
 })
 
-async function createLists () {
+function createLists () {
     ingredientsArray.map((ingredient) => {
         const tag = new Tag(ingredient, filters.ingredients.name);
         const li = new ListElements(ingredient).displayItem();
-        filters.ingredients.list.append(li);
         li.addEventListener('click', (e) => {
-            e.stopPropagation()
+            e.stopPropagation();
             addTag(tag);
         })
+        filters.ingredients.list.append(li);
     });
+
     applianceArray.map((appliance) => {
         const tag = new Tag(appliance, filters.appliances.name);
         const li = new ListElements(appliance).displayItem();
-        filters.appliances.list.append(li);
-        li.addEventListener('click', (e) => {
-            e.stopPropagation()
+        li.addEventListener('click', () => {
+            e.stopPropagation();
             addTag(tag);
         })
+        filters.appliances.list.append(li);
     });
+
     ustensilsArray.map((ustensil) => {
         const tag = new Tag(ustensil, filters.ustensils.name);
         const li = new ListElements(ustensil).displayItem();
-        filters.ustensils.list.append(li);
-        li.addEventListener('click', (e) => {
-            e.stopPropagation()
+        li.addEventListener('click', () => {
+            e.stopPropagation();
             addTag(tag);
         })
+        filters.ustensils.list.append(li);
     });
 }
 
 function addTag (tag) {
     selectedTags.push(tag);
     createTag();
-    console.log(selectedTags);
+    //console.log(selectedTags)
 }
 
 function createTag(){
     tagsContainer.innerHTML = "";
     selectedTags.forEach((tag) => {
-        const tagElem = tag.displayTag(tagsClasses[tag.type]);
+        const tagElem = tag.displayTag(tagsTypes[tag.type]);
+        tagElem.querySelector('button').addEventListener('click', () => {
+            closeTag(tag);
+        })
         tagsContainer.append(tagElem);
     })
 }
 
 function closeTag(tag){
-    selectedTags.pop(tag);
+    const id = selectedTags.findIndex((item) => item.name == tag.name && item.type == tag.type);
+    //console.log(id);
+    //selectedTags.pop(tag);
+    selectedTags.splice(id, 1);
+    //console.log(tag.name, tag.type)
     createTag();
-    console.log(selectedTags);
+    //console.log(selectedTags);
 }
 
 function searchKeyword (filter) {
-    if(filter.input.value.length >= 3) {
-
+    let value = filter.input.value;
+    let listItem = filter.list.querySelectorAll('li');
+   
+    for (let i = 0; i < listItem.length; i++) {
+        if (!listItem[i].innerText.toLowerCase().includes(value)) {
+            listItem[i].style.display = "none";
+        } else {
+            listItem[i].style.display = "";
+        }
+        console.log(value);
     }
 }
 
@@ -150,9 +181,11 @@ async function displayData() {
     })
 }
 
+
+
 async function init () {
     await displayData();
-    await createLists();
+    createLists();
 
     for(const [, filter] of Object.entries(filters)) {
         filter.control.addEventListener('click', () => {
@@ -162,9 +195,9 @@ async function init () {
             showList(filter);
         })
         filter.input.addEventListener('keyup', () => {
-            console.log(filter.input.value.length)
+            searchKeyword(filter);
         })
-    }   
+    }
 }
 
 init();

@@ -37,11 +37,16 @@ class Tag {
         tagExit.className = "search__tags__tag__btn";
         tagExitBtn.className = "search__tags__tag__btn__icon";
         tagExitBtn.src = "assets/icon-close.png";
-        tagExitBtn.setAttribute('onclick', "closeTag()")
 
         tag.innerText = this.name;
         tagExit.append(tagExitBtn);
         tag.append(tagExit);
         return tag;
+    }
+
+    displayItem() {
+        const listElem = document.createElement('li');
+        listElem.innerText = this.name;
+        return listElem;
     }
 }

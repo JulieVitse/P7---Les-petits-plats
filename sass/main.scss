@@ -47,7 +47,9 @@ header{
             padding: 0 $mp-small;
             &:focus{
                 outline: none;
-                background-color: lighten($color-tersiary, 25%);
+                //background-color: lighten($color-tersiary, 25%);
+                //border: 4px solid lighten($color-primary, 25%);
+                box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.158);
             }
             &::placeholder{
                 transition: all .3s ease;
@@ -81,6 +83,7 @@ header{
                 border: none;
                 height: 24px;
                 margin-left: .5rem;
+                cursor: pointer;
             }
             &--primary{
                 background-color: $color-primary;
@@ -164,6 +167,7 @@ header{
                         position: absolute;
                         font-weight: $font-bold;
                         font-size: 18px;
+                        cursor: text;
                         //display: none;
                     }
                     &__field{
