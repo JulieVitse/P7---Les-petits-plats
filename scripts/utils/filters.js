@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 class Filter {
 
     constructor(filter) {
@@ -8,8 +9,9 @@ class Filter {
         this.list = filter.querySelector('[data-filter-list]');
         this.control = filter.querySelector('[data-filter-control]');
     }
-};
+}
 
+// eslint-disable-next-line no-unused-vars
 class ListElements {
     constructor(name) {
         this.name = name;
@@ -21,6 +23,7 @@ class ListElements {
     }
 }
 
+// eslint-disable-next-line no-unused-vars
 class Tag {
     constructor(name, type) {
         this.name = name;
