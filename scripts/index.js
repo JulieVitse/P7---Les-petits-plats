@@ -296,7 +296,7 @@ function filterRecipes(){
         displayData(filteredRecipes);
         //sinon affiche le message d'erreur
     } else {
-        container.innerHTML = `<p>Aucune recette trouvée</p>`
+        container.innerHTML = `<p>Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`
     } 
 }
 
