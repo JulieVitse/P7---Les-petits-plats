@@ -231,10 +231,10 @@ function filterRecipes(){
     //créé array recettes filtrées
     let filteredRecipes = [];
 
-    const allRecipes = recipes.filter((element) => 
+    /* const allRecipes = recipes.filter((element) => 
     element.name.toLowerCase().includes(searchValue) && 
     element.description.toLowerCase().includes(searchValue) && 
-    element.ingredients.find( ({ingredient}) => ingredient.toLowerCase().includes(searchValue)))
+    element.ingredients.find( ({ingredient}) => ingredient.toLowerCase().includes(searchValue))) */
 
     //map le tableau des recettes
     for (let i = 0; i < recipes.length; i++) {
@@ -258,10 +258,12 @@ function filterRecipes(){
         let hasTagUstensils = true;
         let hasTagIngredients = true;
 
+        //filter tags par type
         const tagsIngredients = selectedTags.filter(({type}) => type == 'ingredients');
         const tagsAppliances = selectedTags.filter(({type}) => type == 'appliances');
         const tagsUstensils = selectedTags.filter(({type}) => type == 'ustensils');
 
+        //si tous les noms des tags ne sont pas dans la recette, passe à false
         if(!tagsIngredients.every(({name}) => recipes[i].ingredients.find( ({ingredient}) => ingredient.toLowerCase().includes(name)))) {
             hasTagIngredients = false;
         }
@@ -291,7 +293,7 @@ function filterRecipes(){
         displayData(filteredRecipes);
         //sinon affiche le message d'erreur
     } else {
-        container.innerHTML = `<p>Aucune recette trouvée</p>`
+        container.innerHTML = `<p>Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`
     } 
 }
 
@@ -314,8 +316,9 @@ function populateTags(filteredRecipes) {
 //display recettes
 function displayData(recettes) {
     const container = document.querySelector('.recipes');
-    container.innerHTML = "";
+    container.innerHTML = ""; //vide le container
 
+    //créé une card pour chaque recette
     recettes.forEach((recipe) => {
         const recipeCard = new Recipe(recipe).displayRecipe();
         container.appendChild(recipeCard);
@@ -325,15 +328,17 @@ function displayData(recettes) {
 
 //init principal
 function init () {
-    displayData(recipes);
-    createArrays(recipes);
-    createLists();
+    displayData(recipes); //affiche les recettes
+    createArrays(recipes); //créé les arrays d'éléments des recettes
+    createLists(); //créé les listes de filtres
 
     //loop les objets des filtres et ajoute les listeners
     for(const [, filter] of Object.entries(filters)) {
+        //listener au click sur le bouton d'input
         filter.control.addEventListener('click', () => {
             expandList(filter);
         })
+        //listener au click dans l'input
         filter.input.addEventListener('click', () => {
             if(filter.container.classList.contains('expanded')){
                 filter.label.classList.add('hidden');
@@ -346,10 +351,11 @@ function init () {
                 showList(filter);
             }
         })
+        //listener à la frappe au clavier dans l'input
         filter.input.addEventListener('keyup', () => {
-            searchKeyword(filter);
+            searchKeyword(filter); //filtre les listes
         })
     }
 }
-
+//init
 init();
