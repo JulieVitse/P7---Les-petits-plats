@@ -47,10 +47,10 @@ function showList (filter){
     
 }
 
+//affichage des listes en grand
 function expandList(filter){
-    if (currentFilter != filter) showList(filter);
-    //console.log(currentFilter);
-    //console.log(filter);
+    if (currentFilter != filter) showList(filter); //vérifie le filtre actuel, affiche la liste normalement si inégal
+    //ajoute en enlève les classes correspondantes
     filter.control.classList.toggle('rotate');
     filter.label.classList.remove('hidden');
     filter.input.classList.remove("clicked");
@@ -60,9 +60,13 @@ function expandList(filter){
     filter.list.classList.toggle('open');
 }
 
+//fermeture des listes
 function closeList(){
+    //enlève le listener de clique en dehors
     document.removeEventListener('click', clickOut);
+    //raccourci current filter
     let filter = currentFilter;
+    //ajoute ou enlève les classes correspondantes
     filter.control.classList.remove('rotate');
     filter.label.classList.remove('hidden');
     filter.input.classList.remove("clicked");
@@ -70,17 +74,19 @@ function closeList(){
     filter.container.classList.remove('expanded');
     filter.list.classList.remove('open');
     filter.list.classList.remove('openfirst');
+    //cache le label si l'input n'est pas vide
     if (filter.input.value != ""){
         filter.label.classList.add('hidden');
     }
+    //passe current filter à null
     currentFilter = null;
 }
 
+//fermeture des listes au click en dehors
 function clickOut(e){
     let clickTarget = e.target;
     if (!currentFilter.container.contains(clickTarget)) {
         closeList();
-        //console.log(clickTarget);
     }
 }
 
@@ -105,10 +111,14 @@ function createArrays(recipeArray){
 
 //création des listes d'éléments (ingrédients, ustensils, appareils)
 function createLists () {
+    //map l'array des ingrédients
     ingredientsArray.map((ingredient) => {
+        //créé un tag ingrédient
         const tag = new Tag(ingredient, filters.ingredients.name);
-        if (tagIsActive(tag)) return;
+        if (tagIsActive(tag)) return; //retire le tag de la liste si il est cliqué
+        //créé élément de liste
         const li = new ListElements(ingredient).displayItem();
+        //listener au click sur un item de liste
         li.addEventListener('click', (e) => {
             e.stopPropagation();
             addTag(tag);
@@ -139,19 +149,29 @@ function createLists () {
     });
 }
 
+//ajout des tags
 function addTag (tag) {
+    //récupère l'index d'un tag
     const id = selectedTags.findIndex((item) => item.name == tag.name);
     if(id < 0){
+        //ajout du tag à l'array des tags sélectionnés
         selectedTags.push(tag);
+        //créé le tag
         createTag();
+        //filtre les recettes
         filterRecipes();
     }
 }
 
+//création des tags
 function createTag(){
+    //vide le container
     tagsContainer.innerHTML = "";
+    //map le tableau des tags sélectionnés
     selectedTags.forEach((tag) => {
+        //créé les tags (classe dans filter.js)
         const tagElem = tag.displayTag(tagsTypes[tag.type]);
+        //listener sur le bouton close, retire le tag
         tagElem.querySelector('button').addEventListener('click', () => {
             closeTag(tag);
         })
@@ -159,13 +179,18 @@ function createTag(){
     })
 }
 
+//fermeture des tags
 function closeTag(tag){
+    //récupère l'index des items dans l'array des tags sélectionnés
     const id = selectedTags.findIndex((item) => item.name == tag.name && item.type == tag.type);
+    //retire le tag de l'array
     selectedTags.splice(id, 1);
     createTag();
+    //filtre les recettes
     filterRecipes();
 }
 
+//vérifie si un tag est déjà cliqué
 function tagIsActive(tag) {
     const id = selectedTags.findIndex((item) => item.name == tag.name && item.type == tag.type);
     if (id >= 0) {
@@ -175,15 +200,20 @@ function tagIsActive(tag) {
     }
 }
 
+//fonction de recherche d'éléments dans les listes
 function searchKeyword (filter) {
+    //récupère le texte entré dans un input
     let value = filter.input.value;
+    //récupère tous les éléments de listes
     let listItem = filter.list.querySelectorAll('li');
-   
+    
+    //loop dans les items de listes
     for (let i = 0; i < listItem.length; i++) {
+        //si l'élément ne commence pas par le texte entré
         if (!listItem[i].innerText.toLowerCase().startsWith(value.toLowerCase())) {
-            listItem[i].style.display = "none";
+            listItem[i].style.display = "none"; //cache l'élément
         } else {
-            listItem[i].style.display = "";
+            listItem[i].style.display = ""; //sinon laisse l'élément dans la liste
         }
     }
 }
@@ -193,9 +223,10 @@ function search(){
     filterRecipes();
 }
 
+//fonction de filtrage des recettes
 function filterRecipes(){
-    const search = document.getElementById('search');
-    let searchValue = search.value.toLowerCase();
+    const search = document.getElementById('search'); //search bar
+    let searchValue = search.value.toLowerCase(); //récupère le texte entré dans la search bar
 
     //créé array recettes filtrées
     let filteredRecipes = [];
@@ -226,8 +257,29 @@ function filterRecipes(){
         let countIngredientsInRecipe = 0;
         let countUstensilsInRecipe = 0;
 
+        const tagsIngredients = selectedTags.filter(({type}) => type == 'ingredients');
+        const tagsAppliances = selectedTags.filter(({type}) => type == 'appliances');
+        const tagsUstensils = selectedTags.filter(({type}) => type == 'ustensils');
+
+        if(!tagsIngredients.every(({name}) => recipes[i].ingredients.find( ({ingredient}) => ingredient.toLowerCase().includes(name)))) {
+            hasTagIngredients = false;
+        }
+
+        if(!tagsUstensils.every(({name}) => recipes[i].ustensils.find( (ustensil) => ustensil.toLowerCase().includes(name)))) {
+            hasTagUstensils = false;
+        }
+
+        if(!tagsAppliances.every(({name}) => recipes[i].appliance.toLowerCase().includes(name))) {
+            hasTagAppliances = false;
+        }
+
+        //ajoute la recette à l'array si elle passe les checks
+        if(hasSearch && hasTagAppliances && hasTagIngredients && hasTagUstensils) {
+            filteredRecipes.push(recipes[i]);
+        }
+
         //map tableau des tags sélectionnés
-        for(let x = 0; x < selectedTags.length; x++) {
+        /* for(let x = 0; x < selectedTags.length; x++) {
 
             //check les tags appliances
             if(selectedTags[x].type == 'appliances') {
@@ -236,10 +288,12 @@ function filterRecipes(){
                     //passe à false si le tag n'est pas présent dans la recette
                     hasTagAppliances = false;
                 }
-            }
+            } */
+
+            
 
             //check les tags ingrédients
-            if(selectedTags[x].type == 'ingredients') {
+            /* if(selectedTags[x].type == 'ingredients') {
                 //increase count des tags ingredients
                 countTagIngredients++;
                 //map les ingrédients de la recette
@@ -250,10 +304,10 @@ function filterRecipes(){
                         countIngredientsInRecipe++;
                     }
                 }
-            }
+            } */
 
             //check les tags ustensils
-            if(selectedTags[x].type == 'ustensils') {
+            /* if(selectedTags[x].type == 'ustensils') {
                 //increase count des tags ustensils
                 countTagUstensils++;
                 //map les ustensiles de la recette
@@ -265,24 +319,21 @@ function filterRecipes(){
                     }
                 }
             }
-        }
+        }*/
 
         //compare count total des ingrédients au count des ingrédients présents dans la recette
-        if (countTagIngredients != countIngredientsInRecipe) {
+        /* if (countTagIngredients != countIngredientsInRecipe) {
             //passe à false si ils ne sont pas égaux
             hasTagIngredients = false;
-        }
+        } */
 
         //compare count total des ustensils au count des ustensiles présents dans la recette
-        if (countTagUstensils != countUstensilsInRecipe) {
+        /* if (countTagUstensils != countUstensilsInRecipe) {
             //passe à false si ils ne sont pas égaux
             hasTagUstensils = false;
-        }
+        } */
 
-        //ajoute la recette à l'array si elle passe les checks
-        if(hasSearch && hasTagAppliances && hasTagIngredients && hasTagUstensils) {
-            filteredRecipes.push(recipes[i]);
-        }    
+            
     }
 
     //mets à jour les tags
