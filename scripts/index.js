@@ -231,6 +231,11 @@ function filterRecipes(){
     //créé array recettes filtrées
     let filteredRecipes = [];
 
+    const allRecipes = recipes.filter((element) => 
+    element.name.toLowerCase().includes(searchValue) && 
+    element.description.toLowerCase().includes(searchValue) && 
+    element.ingredients.find( ({ingredient}) => ingredient.toLowerCase().includes(searchValue)))
+
     //map le tableau des recettes
     for (let i = 0; i < recipes.length; i++) {
         
@@ -252,10 +257,6 @@ function filterRecipes(){
         let hasTagAppliances = true;
         let hasTagUstensils = true;
         let hasTagIngredients = true;
-        let countTagIngredients = 0;
-        let countTagUstensils = 0;
-        let countIngredientsInRecipe = 0;
-        let countUstensilsInRecipe = 0;
 
         const tagsIngredients = selectedTags.filter(({type}) => type == 'ingredients');
         const tagsAppliances = selectedTags.filter(({type}) => type == 'appliances');
@@ -276,64 +277,7 @@ function filterRecipes(){
         //ajoute la recette à l'array si elle passe les checks
         if(hasSearch && hasTagAppliances && hasTagIngredients && hasTagUstensils) {
             filteredRecipes.push(recipes[i]);
-        }
-
-        //map tableau des tags sélectionnés
-        /* for(let x = 0; x < selectedTags.length; x++) {
-
-            //check les tags appliances
-            if(selectedTags[x].type == 'appliances') {
-                //check si l'item dans la recette correspond au nom du tag
-                if(recipes[i].appliance.toLowerCase() != selectedTags[x].name.toLowerCase()) {
-                    //passe à false si le tag n'est pas présent dans la recette
-                    hasTagAppliances = false;
-                }
-            } */
-
-            
-
-            //check les tags ingrédients
-            /* if(selectedTags[x].type == 'ingredients') {
-                //increase count des tags ingredients
-                countTagIngredients++;
-                //map les ingrédients de la recette
-                for(let y = 0; y < recipes[i].ingredients.length; y++) {
-                    //check si un ingrédient de la recette correspond au nom du tag
-                    if(recipes[i].ingredients[y].ingredient.toLowerCase() == selectedTags[x].name.toLowerCase()) {
-                        //increase count des ingrédients présents dans la recette
-                        countIngredientsInRecipe++;
-                    }
-                }
-            } */
-
-            //check les tags ustensils
-            /* if(selectedTags[x].type == 'ustensils') {
-                //increase count des tags ustensils
-                countTagUstensils++;
-                //map les ustensiles de la recette
-                for(let z = 0; z < recipes[i].ustensils.length; z++) {
-                    //check si un ustensile de la recette correspond au nom du tag
-                    if(recipes[i].ustensils[z].toLowerCase() == selectedTags[x].name.toLowerCase()) {
-                        //increase count des ustensiles présents dans la recette
-                        countUstensilsInRecipe++;
-                    }
-                }
-            }
-        }*/
-
-        //compare count total des ingrédients au count des ingrédients présents dans la recette
-        /* if (countTagIngredients != countIngredientsInRecipe) {
-            //passe à false si ils ne sont pas égaux
-            hasTagIngredients = false;
-        } */
-
-        //compare count total des ustensils au count des ustensiles présents dans la recette
-        /* if (countTagUstensils != countUstensilsInRecipe) {
-            //passe à false si ils ne sont pas égaux
-            hasTagUstensils = false;
-        } */
-
-            
+        }         
     }
 
     //mets à jour les tags
