@@ -47,10 +47,10 @@ function showList (filter){
     
 }
 
+//affichage des listes en grand
 function expandList(filter){
-    if (currentFilter != filter) showList(filter);
-    //console.log(currentFilter);
-    //console.log(filter);
+    if (currentFilter != filter) showList(filter); //vérifie le filtre actuel, affiche la liste normalement si inégal
+    //ajoute et enlève les classes correspondantes
     filter.control.classList.toggle('rotate');
     filter.label.classList.remove('hidden');
     filter.input.classList.remove("clicked");
@@ -60,9 +60,13 @@ function expandList(filter){
     filter.list.classList.toggle('open');
 }
 
+//fermeture des listes
 function closeList(){
+    //enlève le listener de clique en dehors
     document.removeEventListener('click', clickOut);
+    //raccourci current filter
     let filter = currentFilter;
+    //ajoute ou enlève les classes correspondantes
     filter.control.classList.remove('rotate');
     filter.label.classList.remove('hidden');
     filter.input.classList.remove("clicked");
@@ -70,45 +74,54 @@ function closeList(){
     filter.container.classList.remove('expanded');
     filter.list.classList.remove('open');
     filter.list.classList.remove('openfirst');
+    //cache le label si l'input n'est pas vide
     if (filter.input.value != ""){
         filter.label.classList.add('hidden');
     }
+    //passe current filter à null
     currentFilter = null;
 }
 
+//fermeture des listes au click en dehors
 function clickOut(e){
     let clickTarget = e.target;
+    //vérifie si le click se passe dans le container du filtre actuellement ouvert
     if (!currentFilter.container.contains(clickTarget)) {
+        //ferme la liste si false
         closeList();
-        //console.log(clickTarget);
     }
 }
 
 // créé arrays pour listes de filtre
 function createArrays(recipeArray){
     recipeArray.map((recipe) => {
-        //ustenstiles array
-        recipe.ustensils.map((ustensil) => {
-            ustensilsArray.push(ustensil.toLowerCase());
-            ustensilsArray = [...new Set(ustensilsArray)].sort();
+        //ustensiles array
+        recipe.ustensils.map((ustensil) => { //map tous les ustensiles
+            ustensilsArray.push(ustensil.toLowerCase()); //ajoute chaque item au nouveau tableau
+            ustensilsArray = [...new Set(ustensilsArray)].sort(); //enlève les doublons et tri le tableau
         });
         //ingredients array
-        let ingredientList = recipe.ingredients.map(a => a.ingredient.toLowerCase());
-        ingredientsArray.push(...ingredientList);
-        ingredientsArray = [...new Set(ingredientsArray)].sort();
+        let ingredientList = recipe.ingredients.map(a => a.ingredient.toLowerCase()); //map tous les ingrédients
+        ingredientsArray.push(...ingredientList); //ajoute au nouveau tableau
+        ingredientsArray = [...new Set(ingredientsArray)].sort(); //enlève doublons et tri
+
         // appareils array
-        applianceArray.push(recipe.appliance.toLowerCase());
-        applianceArray = [...new Set(applianceArray)].sort();
+        applianceArray.push(recipe.appliance.toLowerCase()); //ajoute tous les appareils au nouveau tableau
+        applianceArray = [...new Set(applianceArray)].sort(); //enlève doublons et tri
     })
 }
 
 
 //création des listes d'éléments (ingrédients, ustensils, appareils)
 function createLists () {
+    //map l'array des ingrédients
     ingredientsArray.map((ingredient) => {
-        const tag = new Tag(ingredient, filters.ingredients.name);
-        if (tagIsActive(tag)) return;
+        //créé un tag ingrédient
+        const tag = new Tag(ingredient, filters.ingredients.name); 
+        if (tagIsActive(tag)) return; //retire le tag de la liste si il est cliqué
+        //créé élément de liste
         const li = new ListElements(ingredient).displayItem();
+        //listener au click sur un item de liste
         li.addEventListener('click', (e) => {
             e.stopPropagation();
             addTag(tag);
@@ -116,10 +129,14 @@ function createLists () {
         filters.ingredients.list.append(li);
     });
 
+    //map l'array des appareils
     applianceArray.map((appliance) => {
+        //créé un tag appliance
         const tag = new Tag(appliance, filters.appliances.name);
-        if (tagIsActive(tag)) return;
+        if (tagIsActive(tag)) return; //retire le tag de la liste si il est cliqué
+        //créé élément de liste
         const li = new ListElements(appliance).displayItem();
+        //listener au click sur un item de liste
         li.addEventListener('click', (e) => {
             e.stopPropagation();
             addTag(tag);
@@ -127,10 +144,14 @@ function createLists () {
         filters.appliances.list.append(li);
     });
 
+    //map l'array des ustensiles
     ustensilsArray.map((ustensil) => {
+        //créé un tag ustensil
         const tag = new Tag(ustensil, filters.ustensils.name);
-        if (tagIsActive(tag)) return;
+        if (tagIsActive(tag)) return; //retire le tag de la liste si il est cliqué
+        //créé élément de liste
         const li = new ListElements(ustensil).displayItem();
+        //listener au click sur un item de liste
         li.addEventListener('click', (e) => {
             e.stopPropagation();
             addTag(tag);
@@ -139,19 +160,29 @@ function createLists () {
     });
 }
 
+//ajout des tags
 function addTag (tag) {
+    //récupère l'index d'un tag
     const id = selectedTags.findIndex((item) => item.name == tag.name);
     if(id < 0){
+        //ajout du tag à l'array des tags sélectionnés
         selectedTags.push(tag);
+        //créé le tag
         createTag();
+        //filtre les recettes
         filterRecipes();
     }
 }
 
+//création des tags
 function createTag(){
+    //vide le container
     tagsContainer.innerHTML = "";
+    //map le tableau des tags sélectionnés
     selectedTags.forEach((tag) => {
-        const tagElem = tag.displayTag(tagsTypes[tag.type]);
+        //créé les tags (classe dans filter.js)
+        const tagElem = tag.displayTag(tagsTypes[tag.type]); //"tag" défini dans la fonction createLists
+        //listener sur le bouton close, retire le tag
         tagElem.querySelector('button').addEventListener('click', () => {
             closeTag(tag);
         })
@@ -159,13 +190,18 @@ function createTag(){
     })
 }
 
+//fermeture des tags
 function closeTag(tag){
+    //récupère l'index des items dans l'array des tags sélectionnés
     const id = selectedTags.findIndex((item) => item.name == tag.name && item.type == tag.type);
+    //retire le tag de l'array
     selectedTags.splice(id, 1);
     createTag();
+    //filtre les recettes
     filterRecipes();
 }
 
+//vérifie si un tag est déjà cliqué
 function tagIsActive(tag) {
     const id = selectedTags.findIndex((item) => item.name == tag.name && item.type == tag.type);
     if (id >= 0) {
@@ -175,27 +211,35 @@ function tagIsActive(tag) {
     }
 }
 
+//fonction de recherche d'éléments dans les listes
 function searchKeyword (filter) {
+    //récupère le texte entré dans un input
     let value = filter.input.value;
+    //récupère tous les éléments de listes
     let listItem = filter.list.querySelectorAll('li');
-   
+    
+    //loop dans les items de listes
     for (let i = 0; i < listItem.length; i++) {
+        //si l'élément ne commence pas par le texte entré
         if (!listItem[i].innerText.toLowerCase().startsWith(value.toLowerCase())) {
-            listItem[i].style.display = "none";
+            listItem[i].style.display = "none"; //cache l'élément
         } else {
-            listItem[i].style.display = "";
+            listItem[i].style.display = ""; //sinon laisse l'élément dans la liste
         }
     }
 }
+
+/* -------------------------- RECHERCHE PRINCIPALE -------------------------- */
 
 //fonction de recherche principale, appellée dans le html
 function search(){
     filterRecipes();
 }
 
-function filterRecipes(){
-    const search = document.getElementById('search');
-    let searchValue = search.value.toLowerCase();
+//fonction de filtrage des recettes
+function filterRecipes(){ //call dans search, addtag & closetag functions
+    const search = document.getElementById('search'); //search bar
+    let searchValue = search.value.toLowerCase(); //récupère le texte entré dans la search bar
 
     //créé array recettes filtrées
     let filteredRecipes = [];
@@ -217,10 +261,11 @@ function filterRecipes(){
             }
         }
 
-        //vérifie les tags
+        //vérification des tags
         let hasTagAppliances = true;
         let hasTagUstensils = true;
         let hasTagIngredients = true;
+
         let countTagIngredients = 0;
         let countTagUstensils = 0;
         let countIngredientsInRecipe = 0;
@@ -319,8 +364,9 @@ function populateTags(filteredRecipes) {
 //display recettes
 function displayData(recettes) {
     const container = document.querySelector('.recipes');
-    container.innerHTML = "";
+    container.innerHTML = ""; //vide le container
 
+    //créé une card pour chaque recette
     recettes.forEach((recipe) => {
         const recipeCard = new Recipe(recipe).displayRecipe();
         container.appendChild(recipeCard);
@@ -330,15 +376,17 @@ function displayData(recettes) {
 
 //init principal
 function init () {
-    displayData(recipes);
-    createArrays(recipes);
-    createLists();
+    displayData(recipes); //affiche les recettes
+    createArrays(recipes); //créé les arrays d'éléments des recettes
+    createLists(); //créé les listes de filtres
 
     //loop les objets des filtres et ajoute les listeners
     for(const [, filter] of Object.entries(filters)) {
+        //listener au click sur le bouton d'input
         filter.control.addEventListener('click', () => {
             expandList(filter);
-        })
+        });
+        //listener au click dans l'input
         filter.input.addEventListener('click', () => {
             if(filter.container.classList.contains('expanded')){
                 filter.label.classList.add('hidden');
@@ -350,11 +398,13 @@ function init () {
             } else {
                 showList(filter);
             }
-        })
+        });
+        //listener à la frappe au clavier dans l'input
         filter.input.addEventListener('keyup', () => {
-            searchKeyword(filter);
-        })
+            searchKeyword(filter); //filtre les listes
+        });
     }
 }
 
+//init
 init();
