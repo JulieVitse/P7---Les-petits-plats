@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+
 class Ingredient {
     constructor(data){
         this.name = data.ingredient;

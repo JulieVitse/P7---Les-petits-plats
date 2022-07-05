@@ -216,46 +216,12 @@ function searchKeyword (filter) {
             listItem[i].style.display = ""; //sinon laisse l'élément dans la liste
         }
     }
-}
-
-/* function filterRecipes2(){
-    const search = document.getElementById('search'); //search bar
-    let searchValue = search.value.toLowerCase(); //récupère le texte entré dans la search bar
-
-    let filteredRecipes2 = [];
-
-    //filtre les recettes
-    filteredRecipes2 = recipes.filter((recipe) => {
-        //check que 3 caractères sont entrés
-        if(searchValue.length >= 3) {
-            //vérifie la saisie dans les recettes
-            if (recipe.name.toLowerCase().includes(searchValue) || 
-            recipe.description.toLowerCase().includes(searchValue) || 
-            recipe.ingredients.find( ({ingredient}) => ingredient.toLowerCase().includes(searchValue))) {
-                return filteredRecipes2;
-            }
-        } else return recipes;
-    });
-
-    //check si l'array de recettes filtrées contient au moins une recette
-    if(filteredRecipes2.length > 0){
-        //reset l'affichage
-        container.innerHTML = "";
-        //display les recettes
-        displayData(filteredRecipes2);
-        //sinon affiche le message d'erreur
-    } else {
-        container.innerHTML = `<p>Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`
-    } 
-
-}   */      
+} 
 
 //fonction de recherche principale, appellée dans le html
 function search(){
     filterRecipes();
 }
-
-
 
 //fonction de filtrage des recettes
 function filterRecipes(){
