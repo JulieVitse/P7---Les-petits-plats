@@ -218,7 +218,7 @@ function searchKeyword (filter) {
     }
 }
 
-function filterRecipes2(){
+/* function filterRecipes2(){
     const search = document.getElementById('search'); //search bar
     let searchValue = search.value.toLowerCase(); //récupère le texte entré dans la search bar
 
@@ -248,11 +248,11 @@ function filterRecipes2(){
         container.innerHTML = `<p>Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`
     } 
 
-}        
+}   */      
 
 //fonction de recherche principale, appellée dans le html
 function search(){
-    filterRecipes2();
+    filterRecipes();
 }
 
 
@@ -266,7 +266,7 @@ function filterRecipes(){
     let filteredRecipes = [];
 
     //map le tableau des recettes
-    for (let i = 0; i < recipes.length; i++) {
+    recipes.map(recipe => {
         
         let hasSearch = true;
 
@@ -274,9 +274,9 @@ function filterRecipes(){
         if(searchValue.length >= 3){
             //vérifie si le nom, la description ou les ingrédients de la recette contiennent le texte entré dans l'input
             if(
-                !recipes[i].name.toLowerCase().includes(searchValue) && 
-                !recipes[i].description.toLowerCase().includes(searchValue) &&
-                !recipes[i].ingredients.find( ({ingredient}) => ingredient.toLowerCase().includes(searchValue))) {
+                !recipe.name.toLowerCase().includes(searchValue) && 
+                !recipe.description.toLowerCase().includes(searchValue) &&
+                !recipe.ingredients.find( ({ingredient}) => ingredient.toLowerCase().includes(searchValue))) {
                 //return false si le texte entré ne correspond à rien
                 hasSearch = false;
             }
@@ -293,23 +293,23 @@ function filterRecipes(){
         const tagsUstensils = selectedTags.filter(({type}) => type == 'ustensils');
 
         //si tous les noms des tags ne sont pas dans la recette, passe à false
-        if(!tagsIngredients.every(({name}) => recipes[i].ingredients.find( ({ingredient}) => ingredient.toLowerCase().includes(name)))) {
+        if(!tagsIngredients.every(({name}) => recipe.ingredients.find( ({ingredient}) => ingredient.toLowerCase().includes(name)))) {
             hasTagIngredients = false;
         }
 
-        if(!tagsUstensils.every(({name}) => recipes[i].ustensils.find( (ustensil) => ustensil.toLowerCase().includes(name)))) {
+        if(!tagsUstensils.every(({name}) => recipe.ustensils.find( (ustensil) => ustensil.toLowerCase().includes(name)))) {
             hasTagUstensils = false;
         }
 
-        if(!tagsAppliances.every(({name}) => recipes[i].appliance.toLowerCase().includes(name))) {
+        if(!tagsAppliances.every(({name}) => recipe.appliance.toLowerCase().includes(name))) {
             hasTagAppliances = false;
         }
 
         //ajoute la recette à l'array si elle passe les checks
         if(hasSearch && hasTagAppliances && hasTagIngredients && hasTagUstensils) {
-            filteredRecipes.push(recipes[i]);
+            filteredRecipes.push(recipe);
         }         
-    }
+    })
 
     //mets à jour les tags
     populateTags(filteredRecipes);
