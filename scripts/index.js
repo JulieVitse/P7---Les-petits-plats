@@ -309,7 +309,7 @@ function filterRecipes(){
         if(hasSearch && hasTagAppliances && hasTagIngredients && hasTagUstensils) {
             filteredRecipes.push(recipe);
         }         
-    })
+    });
 
     //mets à jour les tags
     populateTags(filteredRecipes);
@@ -322,7 +322,7 @@ function filterRecipes(){
         displayData(filteredRecipes);
         //sinon affiche le message d'erreur
     } else {
-        container.innerHTML = `<p>Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`
+        container.innerHTML = `<p>Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`;
     } 
 }
 
