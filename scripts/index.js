@@ -224,7 +224,7 @@ function search(){
 }
 
 //fonction de filtrage des recettes
-function filterRecipes(){
+function filterRecipes(){ //call dans search, addtag & closetag functions
     const search = document.getElementById('search'); //search bar
     let searchValue = search.value.toLowerCase(); //récupère le texte entré dans la search bar
 
