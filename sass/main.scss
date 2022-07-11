@@ -30,6 +30,9 @@ header{
     align-items: center;
     justify-content: center;
     padding-top: $mp-medium;
+    @include mobile{
+        padding-top: 0;
+    }
     &__img{
         display: block;
         width: 270px;
@@ -273,7 +276,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 .hidden-m{
     @include mobile{
-        z-index: -1;
+        z-index: 0;
     }
 }
 /* --------------------------------- recipes -------------------------------- */
