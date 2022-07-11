@@ -16,7 +16,7 @@ html{
 .body{
     max-width: 1440px;
     margin: auto;
-    @include mobile{
+    @include mobile-sm{
         padding: $mp-smaller;
     }
 }
@@ -30,13 +30,13 @@ header{
     align-items: center;
     justify-content: center;
     padding-top: $mp-medium;
-    @include mobile{
+    @include mobile-sm{
         padding-top: 0;
     }
     &__img{
         display: block;
         width: 270px;
-        @include mobile{
+        @include mobile-sm{
             width: 185px;
         }
     }
@@ -55,6 +55,9 @@ header{
             border-radius: $radius;
             font-size: 18px;
             padding: 0 $mp-small;
+            @include mobile-sm{
+                height: 50px;
+            }
             &:focus{
                 outline: none;
                 //background-color: lighten($color-tersiary, 25%);
@@ -75,6 +78,9 @@ header{
             top: 50%;
             transform: translate(-50%, -50%);
             font-size: 2rem;
+            @include mobile-sm{
+                font-size: 1.5rem;
+            }
         }
     }
     &__tags{
@@ -110,8 +116,14 @@ header{
         display: flex;
         width: 100%;
         gap: $mp-medium;
-        @include mobile{
+        @include mobile-sm{
+            gap: $mp-smaller;
             flex-wrap: wrap;
+        }
+        @include mobile{
+            flex-wrap: nowrap;
+            gap: $mp-smaller;
+            justify-content: space-between;
         }
         &__filter{
             width: 170px;
@@ -119,6 +131,13 @@ header{
             border-radius: $radius;
             display: flex;
             position: relative;
+            @include mobile-sm{
+                width: 100%;
+                height: 50px;
+            }
+            @include mobile{
+                flex-basis: 100%;
+            }
             &--first &{
                 &__wrapper{
                     background: $color-primary;
@@ -146,7 +165,7 @@ header{
                 }
             }
             &--third{
-                @include mobile{
+                @include mobile-sm{
                     z-index: 0;
                 }
             }
@@ -173,7 +192,7 @@ header{
                 height: auto;
                 color: $color-white;
                 border-radius: $radius;
-                @include mobile{
+                @include mobile-sm{
                     z-index: 999;
                 }
                 &__input{
@@ -183,12 +202,15 @@ header{
                     justify-content: space-between;
                     color: $color-white;
                     padding: 0 $mp-smaller;
+                    @include mobile-sm{
+                        height: 50px;
+                    }
                     &__label{
                         position: absolute;
                         font-weight: $font-bold;
                         font-size: 18px;
                         cursor: text;
-                        //display: none;
+                        
                     }
                     &__field{
                         border: none;
@@ -216,7 +238,7 @@ header{
                     max-height: 397px;
                     overflow-y: auto;
                     display: none;
-                    @include mobile{
+                    @include mobile-sm{
                         position: relative;
                         z-index: 9999;
                         overflow-x: clip;
@@ -252,18 +274,35 @@ input[type="search"]::-webkit-search-results-decoration {
 .open{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    @include mobile{
+    @include mobile-sm{
         grid-template-columns: repeat(2,1fr);
     }
 }
 .openfirst{
     display: grid;
+    @include mobile-sm{
+        grid-template-columns: repeat(2,1fr);
+    }
+    @include mobile{
+        grid-template-columns: 1fr;
+    }
 }
 .expanded{
     width: 667px;
+    transition: all .3s ease;
+    @include mobile-sm{
+        flex-basis: 100%;
+    }
 }
 .expandedfirst{
     width: 300px;
+    @include mobile-sm{
+        width: 100%;
+    }
+    @include mobile{
+        width: 33%;
+        flex-basis: initial;
+    }
 }
 .rotate{
     transform: rotate(180deg);
@@ -275,8 +314,11 @@ input[type="search"]::-webkit-search-results-decoration {
     display: none;
 }
 .hidden-m{
-    @include mobile{
+    @include mobile-sm{
         z-index: 0;
+    }
+    @include mobile{
+        flex-shrink: 99;
     }
 }
 /* --------------------------------- recipes -------------------------------- */
@@ -285,7 +327,7 @@ input[type="search"]::-webkit-search-results-decoration {
     grid-template-columns: repeat(3, 1fr);
     gap: $mp-large;
     margin-bottom: $mp-medium;
-    @include mobile{
+    @include mobile-sm{
         grid-template-columns: 1fr;
     }
 }

@@ -1,5 +1,11 @@
 @mixin mobile {
-    @media screen and (max-width: map-get($breakpoints, device-med-max)){
+    @media screen and (min-width: map-get($breakpoints, device-sm-min)) and(max-width: map-get($breakpoints, device-med-max)){
+        @content;
+    }
+}
+
+@mixin mobile-sm {
+    @media screen and (max-width: map-get($breakpoints, device-sm-max)){
         @content;
     }
 }
