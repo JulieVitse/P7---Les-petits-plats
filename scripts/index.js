@@ -44,12 +44,17 @@ function showList (filter){
     filter.container.classList.add('expandedfirst');
     filter.list.classList.remove('open');
     filter.list.classList.add('openfirst');
-    
+    for(const [, filter] of Object.entries(filters)){
+        filter.container.classList.add('hidden-m');
+        if(filter.container.classList.contains('expandedfirst')){
+            filter.container.classList.remove('hidden-m');
+        }
+    }
 }
 
 //affichage des listes en grand
 function expandList(filter){
-    if (currentFilter != filter) showList(filter); //vérifie le filtre actuel, affiche la liste normalement si inégal
+    if (currentFilter != filter) showList(filter) ; //vérifie le filtre actuel, affiche la liste normalement si inégal
     //ajoute en enlève les classes correspondantes
     filter.control.classList.toggle('rotate');
     filter.label.classList.remove('hidden');
@@ -58,6 +63,12 @@ function expandList(filter){
     filter.container.classList.remove('expandedfirst');
     filter.list.classList.remove('openfirst');
     filter.list.classList.toggle('open');
+    for(const [, filter] of Object.entries(filters)){
+        filter.container.classList.add('hidden-m');
+        if(filter.container.classList.contains('expanded')){
+            filter.container.classList.remove('hidden-m');
+        }
+    }
 }
 
 //fermeture des listes
@@ -77,6 +88,9 @@ function closeList(){
     //cache le label si l'input n'est pas vide
     if (filter.input.value != ""){
         filter.label.classList.add('hidden');
+    }
+    for(const [, filter] of Object.entries(filters)){
+        filter.container.classList.remove('hidden-m');
     }
     //passe current filter à null
     currentFilter = null;
@@ -332,6 +346,7 @@ function init () {
         //listener au click sur le bouton d'input
         filter.control.addEventListener('click', () => {
             expandList(filter);
+            
         })
         //listener au click dans l'input
         filter.input.addEventListener('click', () => {

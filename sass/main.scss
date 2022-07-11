@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Roboto&display=swap');
 
 @import "./utils/variables";
+@import "./utils/mixins";
 
 *{
     margin: 0;
@@ -15,6 +16,9 @@ html{
 .body{
     max-width: 1440px;
     margin: auto;
+    @include mobile{
+        padding: $mp-smaller;
+    }
 }
 
 header{
@@ -29,6 +33,9 @@ header{
     &__img{
         display: block;
         width: 270px;
+        @include mobile{
+            width: 185px;
+        }
     }
 }
 
@@ -100,6 +107,9 @@ header{
         display: flex;
         width: 100%;
         gap: $mp-medium;
+        @include mobile{
+            flex-wrap: wrap;
+        }
         &__filter{
             width: 170px;
             height: 69px;
@@ -132,6 +142,11 @@ header{
                     }
                 }
             }
+            &--third{
+                @include mobile{
+                    z-index: 0;
+                }
+            }
             &--third &{
                 &__wrapper{
                     background: $color-tersiary;
@@ -155,7 +170,9 @@ header{
                 height: auto;
                 color: $color-white;
                 border-radius: $radius;
-                
+                @include mobile{
+                    z-index: 999;
+                }
                 &__input{
                     display: flex;
                     height: 69px;
@@ -196,6 +213,11 @@ header{
                     max-height: 397px;
                     overflow-y: auto;
                     display: none;
+                    @include mobile{
+                        position: relative;
+                        z-index: 9999;
+                        overflow-x: clip;
+                    }
                     & li {
                         cursor: pointer;
                         font-size: 18px;
@@ -227,6 +249,9 @@ input[type="search"]::-webkit-search-results-decoration {
 .open{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    @include mobile{
+        grid-template-columns: repeat(2,1fr);
+    }
 }
 .openfirst{
     display: grid;
@@ -246,12 +271,20 @@ input[type="search"]::-webkit-search-results-decoration {
 .hidden{
     display: none;
 }
+.hidden-m{
+    @include mobile{
+        z-index: -1;
+    }
+}
 /* --------------------------------- recipes -------------------------------- */
 .recipes{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: $mp-large;
     margin-bottom: $mp-medium;
+    @include mobile{
+        grid-template-columns: 1fr;
+    }
 }
 
 .card{
