@@ -3,6 +3,7 @@
 @import "./utils/variables";
 @import "./utils/mixins";
 
+/* ---------------------------------- BASE ---------------------------------- */
 *{
     margin: 0;
     padding: 0;
@@ -29,7 +30,7 @@ html{
         padding: $mp-small;
     }
 }
-
+/* --------------------------------- HEADER --------------------------------- */
 header{
     margin-bottom: $mp-medium;
 }
@@ -50,9 +51,10 @@ header{
         }
     }
 }
-
+/* --------------------------------- SEARCH --------------------------------- */
 .search{
     margin-bottom: $mp-large;
+    /* ------------------------------- main search ------------------------------ */
     &__main{
         position: relative;
         &__input{
@@ -92,6 +94,7 @@ header{
             }
         }
     }
+    /* ---------------------------------- tags ---------------------------------- */
     &__tags{
         display: flex;
         margin: $mp-smaller 0;
@@ -121,6 +124,7 @@ header{
             }
         }
     }
+    /* --------------------------------- filters -------------------------------- */
     &__filters{
         display: flex;
         width: 100%;
@@ -350,7 +354,7 @@ input[type="search"]::-webkit-search-results-decoration {
         gap: $mp-small;
     }
 }
-
+/* ---------------------------------- cards --------------------------------- */
 .card{
     border-radius: $radius;
     background-color: $color-light;
