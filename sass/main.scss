@@ -19,6 +19,15 @@ html{
     @include mobile-sm{
         padding: $mp-smaller;
     }
+    @include mobile{
+        padding: $mp-smaller;
+    }
+    @include tablet-sm{
+        padding: $mp-smaller;
+    }
+    @include laptop{
+        padding: $mp-small;
+    }
 }
 
 header{
@@ -303,6 +312,9 @@ input[type="search"]::-webkit-search-results-decoration {
         width: 33%;
         flex-basis: initial;
     }
+    @include tablet-sm{
+        width: 45%;
+    }
 }
 .rotate{
     transform: rotate(180deg);
@@ -329,6 +341,13 @@ input[type="search"]::-webkit-search-results-decoration {
     margin-bottom: $mp-medium;
     @include mobile-sm{
         grid-template-columns: 1fr;
+    }
+    @include mobile{
+        grid-template-columns: 1fr;
+    }
+    @include tablet-sm{
+        grid-template-columns: repeat(2,1fr);
+        gap: $mp-small;
     }
 }
 

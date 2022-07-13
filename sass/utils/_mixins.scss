@@ -9,3 +9,15 @@
         @content;
     }
 }
+
+@mixin tablet-sm {
+    @media screen and (min-width: map-get($breakpoints, device-med-min)) and (max-width: map-get($breakpoints, tablet-max)){
+        @content;
+    }
+}
+
+@mixin laptop {
+    @media screen and (min-width: map-get($breakpoints, laptop-min)) and (max-width: map-get($breakpoints, desktop-med)){
+        @content;
+    }
+}
