@@ -220,7 +220,6 @@ function searchKeyword (filter) {
     let value = filter.input.value;
     //récupère tous les éléments de listes
     let listItem = filter.list.querySelectorAll('li');
-    
     //loop dans les items de listes
     for (let i = 0; i < listItem.length; i++) {
         //si l'élément ne commence pas par le texte entré
@@ -241,15 +240,11 @@ function search(){
 function filterRecipes(){ //call dans search, addtag & closetag functions
     const search = document.getElementById('search'); //search bar
     let searchValue = search.value.toLowerCase(); //récupère le texte entré dans la search bar
-
     //créé array recettes filtrées
     let filteredRecipes = [];
-
     //map le tableau des recettes
     recipes.map(recipe => {
-        
         let hasSearch = true;
-
         //check que 3 caractères ou + sont entrés
         if(searchValue.length >= 3){
             //vérifie si le nom, la description ou les ingrédients de la recette contiennent le texte entré dans l'input
@@ -261,39 +256,31 @@ function filterRecipes(){ //call dans search, addtag & closetag functions
                 hasSearch = false;
             }
         }
-
         //vérifie les tags
         let hasTagAppliances = true;
         let hasTagUstensils = true;
         let hasTagIngredients = true;
-
         //filter tags par type
         const tagsIngredients = selectedTags.filter(({type}) => type == 'ingredients');
         const tagsAppliances = selectedTags.filter(({type}) => type == 'appliances');
         const tagsUstensils = selectedTags.filter(({type}) => type == 'ustensils');
-
         //si tous les noms des tags ne sont pas dans la recette, passe à false
         if(!tagsIngredients.every(({name}) => recipe.ingredients.find( ({ingredient}) => ingredient.toLowerCase().includes(name)))) {
             hasTagIngredients = false;
         }
-
         if(!tagsUstensils.every(({name}) => recipe.ustensils.find( (ustensil) => ustensil.toLowerCase().includes(name)))) {
             hasTagUstensils = false;
         }
-
         if(!tagsAppliances.every(({name}) => recipe.appliance.toLowerCase().includes(name))) {
             hasTagAppliances = false;
         }
-
         //ajoute la recette à l'array si elle passe les checks
         if(hasSearch && hasTagAppliances && hasTagIngredients && hasTagUstensils) {
             filteredRecipes.push(recipe);
         }         
     });
-
     //mets à jour les tags
     populateTags(filteredRecipes);
-
     //check si l'array de recettes filtrées contient au moins une recette
     if(filteredRecipes.length > 0){
         //reset l'affichage
