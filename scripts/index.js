@@ -242,7 +242,7 @@ function filterRecipes(){ //call dans search, addtag & closetag functions
     let searchValue = search.value.toLowerCase(); //récupère le texte entré dans la search bar
     //créé array recettes filtrées
     let filteredRecipes = [];
-    //map le tableau des recettes
+    //filtre le tableau des recettes
     recipes.filter(recipe => {
         let hasSearch = true;
         //check que 3 caractères ou + sont entrés
