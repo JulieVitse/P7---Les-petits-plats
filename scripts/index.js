@@ -243,7 +243,7 @@ function filterRecipes(){ //call dans search, addtag & closetag functions
     //créé array recettes filtrées
     let filteredRecipes = [];
     //map le tableau des recettes
-    recipes.map(recipe => {
+    recipes.filter(recipe => {
         let hasSearch = true;
         //check que 3 caractères ou + sont entrés
         if(searchValue.length >= 3){
