@@ -56,7 +56,7 @@ class Recipe {
         <div class="card__content">
             <div class="card__content__top">
                 <h4 class="card__content__top__title">${this.name}</h4>
-                <span class="card__content__top__time"><img src="/assets/timer.png" alt="">${this.time} min</span>
+                <span class="card__content__top__time"><img src="assets/timer.png" alt="">${this.time} min</span>
             </div>
 
             <div class="card__content__bot">
